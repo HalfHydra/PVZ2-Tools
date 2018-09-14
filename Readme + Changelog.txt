@@ -21,3 +21,4 @@ Changelog
 
 1.0 - Initial Release
 1.1 - Added Score Tiles, Fixed Potion Images.
+1.2 - Added PVZ2GRAVEITEMSPAWNS AND PVZ2GRAVEZOMBIESPAWNS which allow for making wave based events of gravestones and zombies from said gravestones items. ##UNRELEASED - MAKE SURE TO ADD A DISCLAIMER AND EXAMPLE FOR PVZ2GRAVESPAWN EVENTS!!!

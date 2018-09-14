@@ -14,17 +14,85 @@ textarea {
  width: 410px; height: 250px; font-size: 12px; font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 	</style>
-    <textarea id="xml" rows="20" cols="50"></textarea> 
+    <p2>Event Settings: </p2>
+    <p> Wave Number:
+    <input type="text" id="wavenumber" style="width: 5%" value="">
+    </p>
+    <p> Event Number:
+    <input type="text" id="eventnumber" style="width: 5%" value="">
+    </p>
+    <p> SpawnEffectAnimID:
+    <input type="text" id="effectid" style="width: 26%" value="POPANIM_EFFECTS_TOMBSTONE_DARK_SPAWN_EFFECT">
+    </p>
+    <p> SpawnSoundID:
+    <input type="text" id="soundid" style="width: 19%" value="Play_Zomb_Egypt_TombRaiser_Grave_Rise">
+    </p>
      <p> </p>
+     <img src="./PVZ2GRIDITEMS_files/goldtile.png">
+     <input type="text" id="goldtile" style="width: 3%" value="">
+     <img src="./PVZ2GRIDITEMS_files/flame_spreader_trap.png">
+     <input type="text" id="flame_spreader_trap" style="width: 3%" value="">
+     <img src="./PVZ2GRIDITEMS_files/boulder_trap_falling_forward.png">
+     <input type="text" id="boulder_trap_falling_forward" style="width: 3%" value="">
+     <img src="./PVZ2GRIDITEMS_files/crater.png">
+     <input type="text" id="crater" style="width: 3%" value="">
+     <img src="./PVZ2GRIDITEMS_files/bombegranateseeds.png">
+     <input type="text" id="bombegranateseeds" style="width: 3%" value="">
+     <p> </p>
+     <img src="./PVZ2GRIDITEMS_files/planttarget_squid.png">
+     <input type="text" id="planttarget_squid" style="width: 3%" value="">
+     <img src="./PVZ2GRIDITEMS_files/zombiepotion_speed.png">
+     <input type="text" id="zombiepotion_speed" style="width: 3%" value="">
+     <img src="./PVZ2GRIDITEMS_files/zombiepotion_toughness.png">
+     <input type="text" id="zombiepotion_toughness" style="width: 3%" value="">
+     <img src="./PVZ2GRIDITEMS_files/backpack.png">
+     <input type="text" id="backpack" style="width: 3%" value="">
+     <img src="./PVZ2GRIDITEMS_files/tent.png">
+     <input type="text" id="tent" style="width: 3%" value="">
+     <p> </p>
+     <img src="./PVZ2GRIDITEMS_files/surfboard.png">
+     <input type="text" id="surfboard" style="width: 3%" value="">
+     <img src="./PVZ2GRIDITEMS_files/speaker.png">
+     <input type="text" id="speaker" style="width: 3%" value="">
+     <img src="./PVZ2GRIDITEMS_files/slider_down.png">
+     <input type="text" id="slider_down" style="width: 3%" value="">
+     <img src="./PVZ2GRIDITEMS_files/slider_up.png">
+     <input type="text" id="slider_up" style="width: 3%" value="">
+     <img src="./PVZ2GRIDITEMS_files/slider_down_modern.png">
+     <input type="text" id="slider_down_modern" style="width: 3%" value="">
+     <p> </p>
+     <img src="./PVZ2GRIDITEMS_files/slider_up_modern.png">
+     <input type="text" id="slider_up_modern" style="width: 3%" value="">
+     <img src="./PVZ2GRIDITEMS_files/gravestone_tutorial.png">
+     <input type="text" id="gravestone_tutorial" style="width: 3%" value="">
+     <img src="./PVZ2GRIDITEMS_files/gravestone_egypt.png">
+     <input type="text" id="gravestone_egypt" style="width: 3%" value="">
+     <img src="./PVZ2GRIDITEMS_files/gravestone_dark.png">
+     <input type="text" id="gravestone_dark" style="width: 3%" value="">
+     <img src="./PVZ2GRIDITEMS_files/gravestonePlantfoodOnDestruction.png">
+     <input type="text" id="gravestonePlantfoodOnDestruction" style="width: 3%" value="">
+     <p> </p>
+     <img src="./PVZ2GRIDITEMS_files/gravestoneSunOnDestruction.png">
+     <input type="text" id="gravestoneSunOnDestruction" style="width: 3%" value="">
+    <p> </p>
     <button onclick="CompileLevelXML()">Finished</button>
-     <p> </p>
+    <p> </p>
+    <button onclick="ShowArrays()">Toggle Seperate Arrays</button>
+    <p> </p>
+    <p> <textarea id="xml" rows="20" cols="50"></textarea> 
+    <textarea id="gravestonearray" rows="10" cols="50"></textarea>
+    </p>
     <textarea id="output" rows="10" cols="50"></textarea> 
+
         <script type="text/javascript">
         var version = 1.0;
         var eraser = 47;
-        //document.getElementById('xml').style.display = "none";   
+        document.getElementById('xml').style.display = "none";
+        document.getElementById('gravestonearray').style.display = "none";      
         document.getElementById('output').style.display = "none";	
         document.getElementById("xml").value = "";
+        document.getElementById("gravestonearray").value = "";
+        document.getElementById("output").value = "";
 		//document.getElementById("output").value = "###Don't forget to add### \"RTID\(Gravestones\@CurrentLevel\)\"\n\n";
         var mouseOverSprite = document.createElement("img");
             mouseOverSprite.style.display="block";
@@ -128,13 +196,123 @@ function toggleoutputvisibility() {
         if(display == "none")
               document.getElementById('output').style.display = "block";
      }
+     function ShowArrays() {
+        var display = document.getElementById('xml').style.display;
+        if(display == "none") {
+        document.getElementById('xml').style.display = "block";
+        document.getElementById('gravestonearray').style.display = "block"; 
+    }
+    if(display == "block") {
+        document.getElementById('xml').style.display = "none";
+        document.getElementById('gravestonearray').style.display = "none"; 
+    }
+     }
         function CompileLevelXML() {
-    var str = document.getElementById("xml").value;
+        //var wavenumber = document.getElementById("wavenumber").value;
+        //var eventnumber = document.getElementById("eventnumber").value;
+        //var soundid = document.getElementById("soundid").value;
+        //var effectid = document.getElementById("effectid").value;
+        //var gravestonearray = document.getElementById("gravestonearray").value;
+        //var xml = document.getElementById("xml").value;
+        //document.getElementById('xml').style.display = "none";
+    //var str = document.getElementById("xml").value;
     toggleoutputvisibility();
-        document.getElementById("output").value += str;
-        document.getElementById("output").value += "\n                \]\n            \}\n        \},";
+        //document.getElementById("output").value += str;
+        DoShitWithItemInputs();
+        document.getElementById("output").value += "        \{\n            \"aliases\"\: [\n                \"Wave" + document.getElementById("wavenumber").value + "GravestoneEvent" + document.getElementById("eventnumber").value + "\"\n            \],\n            \"objclass\"\: \"SpawnGravestonesWaveActionProps\",\n            \"objdata\"\: \{\n                \"GravestonePool\"\: \[\n" + document.getElementById("gravestonearray").value + "\n                \],\n                \"SpawnEffectAnimID\"\: \"" + document.getElementById("effectid").value + "\",\n                \"SpawnPositionsPool\"\: \[\n" + document.getElementById("xml").value + "\n                \],\n                \"SpawnSoundID\"\: \"" + document.getElementById("soundid").value + "\"\n            \}\n        \},";
         console.log(allAddedItems);
 		}
+
+        function DoShitWithItemInputs() {
+        var goldtile = document.getElementById("goldtile").value;
+        var flame_spreader_trap = document.getElementById("flame_spreader_trap").value;
+        var boulder_trap_falling_forward = document.getElementById("boulder_trap_falling_forward").value;
+        var crater = document.getElementById("crater").value;
+        var bombegranateseeds = document.getElementById("bombegranateseeds").value;
+        var planttarget_squid = document.getElementById("planttarget_squid").value;
+        var zombiepotion_speed = document.getElementById("zombiepotion_speed").value;
+        var zombiepotion_toughness = document.getElementById("zombiepotion_toughness").value;
+        var backpack = document.getElementById("backpack").value;
+        var tent = document.getElementById("tent").value;
+        var surfboard = document.getElementById("surfboard").value;
+        var speaker = document.getElementById("speaker").value;
+        var slider_down = document.getElementById("slider_down").value;
+        var slider_up = document.getElementById("slider_up").value;
+        var slider_down_modern = document.getElementById("slider_down_modern").value;
+        var slider_up_modern = document.getElementById("slider_up_modern").value;
+        var gravestone_tutorial = document.getElementById("gravestone_tutorial").value;
+        var gravestone_egypt = document.getElementById("gravestone_egypt").value;
+        var gravestone_dark = document.getElementById("gravestone_dark").value;
+        var gravestonePlantfoodOnDestruction = document.getElementById("gravestonePlantfoodOnDestruction").value;
+        var gravestoneSunOnDestruction = document.getElementById("gravestoneSunOnDestruction").value;
+        var before = "                    \{\n                        \"Count\"\: \"";
+        var next = ",\n                        \"Type\"\: \"RTID\("
+        var after = "\@GridItemTypes\)\"\n                    \}";
+        if(goldtile != 0){
+            console.log(document.getElementById("gravestonearray").value);
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + goldtile + next + "goldtile" + after;
+        }
+        if(flame_spreader_trap != 0){
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + flame_spreader_trap + next + "flame_spreader_trap" + after;
+        }
+        if(boulder_trap_falling_forward != 0){
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + boulder_trap_falling_forward + next + "boulder_trap_falling_forward" + after;
+        }
+        if(crater != 0){
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + crater + next + "crater" + after;
+        }
+        if(bombegranateseeds != 0){
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + bombegranateseeds + next + "bombegranateseeds" + after;
+        }
+        if(planttarget_squid != 0){
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + planttarget_squid + next + "planttarget_squid" + after;
+        }
+        if(zombiepotion_speed != 0){
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + zombiepotion_speed + next + "zombiepotion_speed" + after;
+        }
+        if(zombiepotion_toughness != 0){
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + zombiepotion_toughness + next + "zombiepotion_toughness" + after;
+        }
+        if(backpack != 0){
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + backpack + next + "backpack" + after;
+        }
+        if(tent != 0){
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + tent + next + "tent" + after;
+        }
+        if(surfboard != 0){
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + surfboard + next + "surfboard" + after;
+        }
+        if(speaker != 0){
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + speaker + next + "speaker" + after;
+        }
+        if(slider_down != 0){
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + slider_down + next + "slider_down" + after;
+        }
+        if(slider_up != 0){
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + slider_up + next + "slider_up" + after;
+        }
+        if(slider_down_modern != 0){
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + slider_down_modern + next + "slider_down_modern" + after;
+        }
+        if(slider_up_modern != 0){
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + slider_up_modern + next + "slider_up_modern" + after;
+        }
+        if(gravestone_tutorial != 0){
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + gravestone_tutorial + next + "gravestone_tutorial" + after;
+        }
+        if(gravestone_egypt != 0){
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + gravestone_egypt + next + "gravestone_egypt" + after;
+        }
+        if(gravestone_dark != 0){
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + gravestone_dark + next + "gravestone_dark" + after;
+        }
+        if(gravestonePlantfoodOnDestruction != 0){
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + gravestonePlantfoodOnDestruction + next + "gravestonePlantfoodOnDestruction" + after;
+        }
+        if(gravestoneSunOnDestruction != 0){
+            document.getElementById("gravestonearray").value += (document.getElementById("gravestonearray").value.endsWith("}") ? ",\n" : "") + before + gravestoneSunOnDestruction + next + "gravestoneSunOnDestruction" + after;
+        }
+        }
 //Asuki says Hai!
     </script>
     <style>
