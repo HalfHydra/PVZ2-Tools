@@ -492,7 +492,7 @@ function toggleoutputvisibility() {
         var gravestone_dark = document.getElementById("gravestone_dark");
         var gravestonePlantfoodOnDestruction = document.getElementById("gravestonePlantfoodOnDestruction");
         var gravestoneSunOnDestruction = document.getElementById("gravestoneSunOnDestruction");
-        var next = "                        \"Type\"\: \"RTID\("
+        var next = "                        \"RTID\("
         var after = "\@GridItemTypes\)\"";
         if(goldtile.checked == true){
             console.log(document.getElementById("gravestonearray").value);
@@ -717,7 +717,7 @@ function toggleoutputvisibility() {
         var treasureyeti = document.getElementById("treasureyeti").value;
         var vase_gargantuar = document.getElementById("vase_gargantuar").value;
         var next = "                    \{\n                        \"Type\"\: \"RTID\("
-        var after = "\@GridItemTypes\)\"\n                    \}";
+        var after = "\@ZombieTypes\)\"\n                    \}";
         if(mummy != 0){
             for(x=0; x < mummy; x++) {
             document.getElementById("xml").value += (document.getElementById("xml").value.endsWith("}") ? ",\n" : "") + next + "mummy" + after;
